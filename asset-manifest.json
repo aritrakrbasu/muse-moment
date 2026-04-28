@@ -1,15 +1,15 @@
 {
   "files": {
     "main.css": "/muse-moment/static/css/main.fab44653.css",
-    "main.js": "/muse-moment/static/js/main.b77ebe4f.js",
+    "main.js": "/muse-moment/static/js/main.000a34d0.js",
     "static/js/453.d25dad69.chunk.js": "/muse-moment/static/js/453.d25dad69.chunk.js",
     "index.html": "/muse-moment/index.html",
     "main.fab44653.css.map": "/muse-moment/static/css/main.fab44653.css.map",
-    "main.b77ebe4f.js.map": "/muse-moment/static/js/main.b77ebe4f.js.map",
+    "main.000a34d0.js.map": "/muse-moment/static/js/main.000a34d0.js.map",
     "453.d25dad69.chunk.js.map": "/muse-moment/static/js/453.d25dad69.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.fab44653.css",
-    "static/js/main.b77ebe4f.js"
+    "static/js/main.000a34d0.js"
   ]
 }
