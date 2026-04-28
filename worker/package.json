@@ -1,0 +1,16 @@
+{
+  "name": "muse-moment-gemini-proxy",
+  "version": "1.0.0",
+  "description": "Cloudflare Worker proxy for Gemini API with full AI logic",
+  "main": "index.js",
+  "scripts": {
+    "deploy": "wrangler deploy",
+    "dev": "wrangler dev"
+  },
+  "dependencies": {
+    "@google/generative-ai": "^0.21.0"
+  },
+  "devDependencies": {
+    "wrangler": "^3.0.0"
+  }
+}

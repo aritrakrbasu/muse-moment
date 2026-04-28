@@ -23,13 +23,20 @@ The app uses a `gameState` state machine with four phases:
 - `complete` - Session completion screen
 - `souvenir` - Timeline review of the session
 
-### AI Service Layer (`src/services/ai.js`)
-- Uses Google Generative AI (`gemini-3.1-flash-lite-preview` model)
-- **Critical**: API key is hardcoded in `ai.js` line 5 — should be moved to environment variables
-- Implements phase-gated content generation (seduction → play → climax phases)
+### AI Service Layer (`src/services/ai.js` + `worker/`)
+
+**Frontend (`src/services/ai.js`)**:
+- Thin client that sends game parameters to Cloudflare Worker
+- Only dependency: `REACT_APP_WORKER_URL` environment variable
+- No API keys or AI logic in the browser
+
+**Worker (`worker/index.js`)**:
+- Handles ALL AI logic server-side using `@google/generative-ai`
+- Phase-gated content generation (seduction → play → climax phases)
 - Verb rotation system prevents repetitive "massage loop" behavior
-- Fallback mechanical card generation when AI fails or is blocked by safety filters
+- Fallback mechanical card generation when AI fails
 - Post-processing regex corrects gender/anatomy terms based on actor/receiver roles
+- API key stored as Cloudflare Worker secret (`GEMINI_API_KEY`)
 
 ### Progression System
 - Session progress (0.0 to 1.0) gates content types:
@@ -56,3 +63,31 @@ The app uses a `gameState` state machine with four phases:
 - **Regen seed**: Incrementing seed forces AI variation when user regenerates
 - **History**: Stores last 10 cards, passed to AI to prevent repetition
 - **Biology guard**: Post-processing regex ensures anatomical terms match the receiver's gender
+
+## Deployment
+
+### Production (GitHub Pages / Netlify / Vercel)
+
+**ALL AI logic runs server-side** - deploy the Cloudflare Worker first:
+
+```bash
+# 1. Deploy the Cloudflare Worker
+cd worker
+npm install
+npx wrangler secret put GEMINI_API_KEY  # Paste your Gemini API key
+npm run deploy
+
+# 2. Copy the worker URL from output, then update root .env:
+# REACT_APP_WORKER_URL=https://muse-moment-gemini-proxy.xxx.workers.dev
+
+# 3. Build and deploy the React app
+cd ..
+npm run build
+# Deploy the build/ folder to your hosting provider
+```
+
+**Security**: The API key never leaves the server. The frontend only knows the worker URL.
+
+### Local Development (optional)
+
+For local testing without the worker, you can set `REACT_APP_GEMINI_API_KEY` in `.env` - but this is **NOT recommended** as the key will be visible in the browser.
