@@ -26,6 +26,19 @@ const Layout = ({ children, fullWidth = false }) => {
       </div>
 
       <div className={`w-full`}>{children}</div>
+      <a
+        href="https://www.scrolllaunch.com/products/muse-moment-the-ultimate-do-or-drink-party-game?utm_source=badge&utm_medium=embed&utm_campaign=muse-moment-the-ultimate-do-or-drink-party-game&ref=scrolllaunch"
+        target="_blank"
+        rel="noopener noreferrer"
+      >
+        <img
+          src="https://www.scrolllaunch.com/api/badge/muse-moment-the-ultimate-do-or-drink-party-game"
+          alt="Featured on ScrollLaunch"
+          width="220"
+          height="48"
+          loading="lazy"
+        />
+      </a>
     </div>
   );
 };
