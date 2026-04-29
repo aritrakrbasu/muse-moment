@@ -9,14 +9,14 @@ const DurationSelector = ({ onSelect }) => {
         <motion.div
           initial={{ opacity: 0, x: -20 }}
           animate={{ opacity: 1, x: 0 }}
-          className="space-y-1 border-l-2 border-rose-900 pl-4"
+          className="space-y-1 border-l-2 border-red-900 pl-4"
         >
           <span className="text-[10px] tracking-[0.6em] uppercase font-bold text-zinc-600 block">
             Protocol 03
           </span>
           <h2 className="text-2xl font-light tracking-tight uppercase">
             Deck{" "}
-            <span className="font-serif italic text-rose-900">Intensity</span>
+            <span className="font-serif italic text-red-900">Intensity</span>
           </h2>
         </motion.div>
       </header>
@@ -40,10 +40,10 @@ const DurationSelector = ({ onSelect }) => {
             <div className="absolute inset-0 bg-white/[0.01] opacity-0 group-active:opacity-100 transition-opacity rounded-xl" />
 
             <div className="flex flex-col items-start relative z-10">
-              <span className="text-[10px] font-mono text-rose-900 mb-1 opacity-50 group-active:opacity-100">
+              <span className="text-[10px] font-mono text-red-900 mb-1 opacity-50 group-active:opacity-100">
                 VOLUME_0{i + 1}
               </span>
-              <span className="text-6xl md:text-8xl font-light tracking-tighter tabular-nums group-active:text-rose-600 transition-colors">
+              <span className="text-6xl md:text-8xl font-light tracking-tighter tabular-nums group-active:text-red-600 transition-colors">
                 {n}
               </span>
             </div>
@@ -57,7 +57,7 @@ const DurationSelector = ({ onSelect }) => {
                 {[...Array(i + 1)].map((_, idx) => (
                   <div
                     key={idx}
-                    className="w-4 h-[2px] bg-zinc-800 group-active:bg-rose-900 transition-colors"
+                    className="w-4 h-[2px] bg-zinc-800 group-active:bg-red-900 transition-colors"
                   />
                 ))}
               </div>
@@ -68,7 +68,7 @@ const DurationSelector = ({ onSelect }) => {
               className="absolute bottom-0 left-0 h-[1px] bg-zinc-900 w-full"
               whileTap={{ backgroundColor: "#4c0519" }}
             >
-              <motion.div className="h-full bg-rose-900 w-0 group-hover:w-full transition-all duration-700" />
+              <motion.div className="h-full bg-red-900 w-0 group-hover:w-full transition-all duration-700" />
             </motion.div>
           </motion.button>
         ))}

@@ -50,7 +50,7 @@ const CardRating = ({ cardText, onRate }) => {
         className={`flex items-center gap-2 px-4 py-2 rounded-full border transition-all ${
           rated
             ? "opacity-40 cursor-not-allowed"
-            : "border-zinc-800 hover:border-rose-900/50 hover:text-rose-700"
+            : "border-zinc-800 hover:border-red-900/50 hover:text-red-700"
         }`}
       >
         <span className="text-lg">🔥</span>
@@ -74,11 +74,15 @@ const CardRating = ({ cardText, onRate }) => {
         onClick={toggleFavorite}
         className={`ml-4 p-2 rounded-full border transition-all ${
           isFavorite
-            ? "border-rose-900 bg-rose-900/20 text-rose-700"
-            : "border-zinc-800 hover:border-rose-900/50 hover:text-rose-700"
+            ? "border-red-900 bg-red-900/20 text-red-700"
+            : "border-zinc-800 hover:border-red-900/50 hover:text-red-700"
         }`}
       >
-        <Heart size={14} strokeWidth={1} fill={isFavorite ? "currentColor" : "none"} />
+        <Heart
+          size={14}
+          strokeWidth={1}
+          fill={isFavorite ? "currentColor" : "none"}
+        />
       </button>
     </div>
   );

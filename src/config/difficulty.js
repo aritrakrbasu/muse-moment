@@ -21,14 +21,15 @@ export const DIFFICULTY_LEVELS = {
     id: 3,
     name: "Hard",
     sips: 3,
-    color: "rose",
+    color: "red",
     description: "Intense commitment",
     defaultDuration: 90,
     icon: "🌊",
   },
 };
 
-export const getDifficultyById = (id) => DIFFICULTY_LEVELS[id] || DIFFICULTY_LEVELS[1];
+export const getDifficultyById = (id) =>
+  DIFFICULTY_LEVELS[id] || DIFFICULTY_LEVELS[1];
 
 // Helper to determine difficulty from AI response
 export const calculateDifficulty = (text, defaultDuration = null) => {
@@ -60,7 +61,14 @@ export const calculateDifficulty = (text, defaultDuration = null) => {
   }
 
   // Keyword-based fallback for modes without explicit durations
-  const easyKeywords = ["show", "tell", "say", "compliment", "hold hands", "kiss"];
+  const easyKeywords = [
+    "show",
+    "tell",
+    "say",
+    "compliment",
+    "hold hands",
+    "kiss",
+  ];
   const hardKeywords = [
     "oral",
     "penetrate",

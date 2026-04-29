@@ -29,7 +29,7 @@ const ParticipantSetup = ({
       {/* Back Button */}
       <button
         onClick={onBack}
-        className="fixed top-8 left-8 text-zinc-400 hover:text-rose-900 transition-all flex items-center gap-2 group"
+        className="fixed top-8 left-8 text-zinc-400 hover:text-red-900 transition-all flex items-center gap-2 group"
       >
         <ArrowLeft
           size={16}
@@ -51,7 +51,7 @@ const ParticipantSetup = ({
           Entry Protocol
         </span>
         <h1 className="text-4xl md:text-6xl font-serif italic tracking-tight">
-          The <span className="text-rose-800">Cast</span>
+          The <span className="text-red-800">Cast</span>
         </h1>
       </motion.header>
 
@@ -88,7 +88,7 @@ const ParticipantSetup = ({
                         placeholder="Name"
                         className={`flex-1 min-w-0 bg-transparent text-2xl font-serif italic outline-none placeholder:text-zinc-900 group-focus-within:placeholder:text-zinc-800 transition-all ${
                           attemptedContinue && !p.name.trim()
-                            ? "placeholder:text-rose-900"
+                            ? "placeholder:text-red-900"
                             : ""
                         }`}
                       />
@@ -129,7 +129,7 @@ const ParticipantSetup = ({
                           initial={{ opacity: 0, y: -5 }}
                           animate={{ opacity: 1, y: 0 }}
                           exit={{ opacity: 0, y: -5 }}
-                          className="text-[10px] uppercase tracking-[0.3em] text-rose-900 mt-2 pl-8"
+                          className="text-[10px] uppercase tracking-[0.3em] text-red-900 mt-2 pl-8"
                         >
                           Name required
                         </motion.p>
@@ -164,7 +164,7 @@ const ParticipantSetup = ({
                 { id: "womanName", label: "Woman" },
               ].map(({ id, label }) => (
                 <div key={id} className="relative text-center group">
-                  <p className="text-sm uppercase tracking-[0.2em] mb-6 transition-colors group-focus-within:text-rose-900">
+                  <p className="text-sm uppercase tracking-[0.2em] mb-6 transition-colors group-focus-within:text-red-900">
                     {label}
                   </p>
                   <input
@@ -177,19 +177,19 @@ const ParticipantSetup = ({
                     }}
                     className={`w-full bg-transparent text-5xl font-serif italic text-center outline-none border-none placeholder:text-zinc-900 transition-all ${
                       attemptedContinue && !setup[id].trim()
-                        ? "placeholder:text-rose-900"
+                        ? "placeholder:text-red-900"
                         : ""
                     }`}
                     placeholder="Enter Name"
                   />
-                  <div className="mt-4 h-[1px] w-0 mx-auto bg-rose-900 group-focus-within:w-24 transition-all duration-700" />
+                  <div className="mt-4 h-[1px] w-0 mx-auto bg-red-900 group-focus-within:w-24 transition-all duration-700" />
                   <AnimatePresence>
                     {attemptedContinue && !setup[id].trim() && (
                       <motion.p
                         initial={{ opacity: 0, y: -5 }}
                         animate={{ opacity: 1, y: 0 }}
                         exit={{ opacity: 0, y: -5 }}
-                        className="text-[10px] uppercase tracking-[0.3em] text-rose-900 mt-3"
+                        className="text-[10px] uppercase tracking-[0.3em] text-red-900 mt-3"
                       >
                         Name required
                       </motion.p>
@@ -213,7 +213,7 @@ const ParticipantSetup = ({
           onClick={handleContinue}
           className="group relative w-full flex flex-col items-center gap-6 disabled:opacity-20 transition-all duration-1000"
         >
-          <div className="h-20 w-[1px] bg-gradient-to-b from-transparent via-zinc-800 to-zinc-800 group-hover:via-rose-900 group-hover:to-rose-900 transition-all duration-700" />
+          <div className="h-20 w-[1px] bg-gradient-to-b from-transparent via-zinc-800 to-zinc-800 group-hover:via-red-900 group-hover:to-red-900 transition-all duration-700" />
 
           <div className="flex items-center gap-12">
             <span className="text-[11px] font-light uppercase tracking-[1em] text-white/80 group-hover:text-white group-hover:tracking-[1.2em] transition-all duration-700">
@@ -222,7 +222,7 @@ const ParticipantSetup = ({
           </div>
 
           <div className="absolute -bottom-10 opacity-0 group-hover:opacity-100 transition-all duration-1000 transform translate-y-2 group-hover:translate-y-0">
-            <ArrowRight size={18} strokeWidth={1} className="text-rose-900" />
+            <ArrowRight size={18} strokeWidth={1} className="text-red-900" />
           </div>
         </button>
       </motion.footer>

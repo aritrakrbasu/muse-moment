@@ -44,9 +44,7 @@ const InventorySelector = ({ setup, onUpdateSetup, onStart }) => {
         <span className="text-[9px] tracking-[0.5em] uppercase font-bold text-zinc-600">
           Resources
         </span>
-        <h2 className="text-2xl font-light mt-2">
-          Available Inventory
-        </h2>
+        <h2 className="text-2xl font-light mt-2">Available Inventory</h2>
       </div>
 
       {/* Custom Item Input */}
@@ -57,12 +55,12 @@ const InventorySelector = ({ setup, onUpdateSetup, onStart }) => {
           onChange={(e) => setCustomItem(e.target.value)}
           onKeyPress={(e) => e.key === "Enter" && handleAddCustom()}
           placeholder="Add custom item..."
-          className="flex-1 max-w-xs bg-transparent border-b border-white/10 px-4 py-2 text-sm outline-none focus:border-rose-900/50 transition-colors placeholder:text-zinc-800"
+          className="flex-1 max-w-xs bg-transparent border-b border-white/10 px-4 py-2 text-sm outline-none focus:border-red-900/50 transition-colors placeholder:text-zinc-800"
         />
         <button
           onClick={handleAddCustom}
           disabled={!customItem.trim() || allItems.includes(customItem.trim())}
-          className="p-2 rounded-full border border-white/10 text-zinc-500 hover:border-rose-900/50 hover:text-rose-900 disabled:opacity-20 disabled:hover:border-white/10 disabled:hover:text-zinc-500 transition-all"
+          className="p-2 rounded-full border border-white/10 text-zinc-500 hover:border-red-900/50 hover:text-red-900 disabled:opacity-20 disabled:hover:border-white/10 disabled:hover:text-zinc-500 transition-all"
         >
           <Plus size={16} strokeWidth={1} />
         </button>
@@ -88,7 +86,7 @@ const InventorySelector = ({ setup, onUpdateSetup, onStart }) => {
               }
               className={`relative px-8 py-3 rounded-full border text-[9px] uppercase tracking-widest font-bold transition-all ${
                 setup.toys.includes(t)
-                  ? "bg-rose-500 border-rose-500 text-white"
+                  ? "bg-red-500 border-red-500 text-white"
                   : "border-white/5 text-zinc-500 hover:border-white/20"
               }`}
             >

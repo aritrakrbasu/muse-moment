@@ -29,7 +29,7 @@ const HowToPlay = ({ isOpen, onClose }) => {
 
         <div className="space-y-10">
           <div className="text-center space-y-4">
-            <h2 className="text-4xl font-serif italic tracking-tight text-rose-500">
+            <h2 className="text-4xl font-serif italic tracking-tight text-red-500">
               How to Play
             </h2>
             <p className="text-zinc-500 text-sm">
@@ -44,24 +44,38 @@ const HowToPlay = ({ isOpen, onClose }) => {
             </h3>
             <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
               <div className="p-4 rounded-xl bg-zinc-900/30 border border-cyan-900/20">
-                <Users className="text-cyan-500 mb-2" size={20} strokeWidth={1} />
+                <Users
+                  className="text-cyan-500 mb-2"
+                  size={20}
+                  strokeWidth={1}
+                />
                 <h4 className="font-medium text-sm mb-1">BFF</h4>
                 <p className="text-xs text-zinc-500">
-                  Fun & silly dares with friends. Maximum chaos, zero awkwardness.
+                  Fun & silly dares with friends. Maximum chaos, zero
+                  awkwardness.
                 </p>
               </div>
               <div className="p-4 rounded-xl bg-zinc-900/30 border border-pink-900/20">
-                <Heart className="text-pink-500 mb-2" size={20} strokeWidth={1} />
+                <Heart
+                  className="text-pink-500 mb-2"
+                  size={20}
+                  strokeWidth={1}
+                />
                 <h4 className="font-medium text-sm mb-1">Date</h4>
                 <p className="text-xs text-zinc-500">
                   Flirty challenges to build chemistry and tension.
                 </p>
               </div>
-              <div className="p-4 rounded-xl bg-zinc-900/30 border border-rose-900/20">
-                <Flame className="text-rose-500 mb-2" size={20} strokeWidth={1} />
+              <div className="p-4 rounded-xl bg-zinc-900/30 border border-red-900/20">
+                <Flame
+                  className="text-red-500 mb-2"
+                  size={20}
+                  strokeWidth={1}
+                />
                 <h4 className="font-medium text-sm mb-1">Couples</h4>
                 <p className="text-xs text-zinc-500">
-                  Intense dares for established couples. 4-phase journey to climax.
+                  Intense dares for established couples. 4-phase journey to
+                  climax.
                 </p>
               </div>
             </div>
@@ -74,46 +88,52 @@ const HowToPlay = ({ isOpen, onClose }) => {
             </h3>
             <div className="space-y-4">
               <div className="flex gap-4 items-start">
-                <div className="w-8 h-8 rounded-full bg-rose-900/20 flex items-center justify-center flex-shrink-0 text-rose-500 font-bold text-sm">
+                <div className="w-8 h-8 rounded-full bg-red-900/20 flex items-center justify-center flex-shrink-0 text-red-500 font-bold text-sm">
                   1
                 </div>
                 <div>
                   <h4 className="font-medium text-sm mb-1">Select Players</h4>
                   <p className="text-xs text-zinc-500">
-                    Add names (and gender for BFF mode). Choose how many turns you want to play.
+                    Add names (and gender for BFF mode). Choose how many turns
+                    you want to play.
                   </p>
                 </div>
               </div>
               <div className="flex gap-4 items-start">
-                <div className="w-8 h-8 rounded-full bg-rose-900/20 flex items-center justify-center flex-shrink-0 text-rose-500 font-bold text-sm">
+                <div className="w-8 h-8 rounded-full bg-red-900/20 flex items-center justify-center flex-shrink-0 text-red-500 font-bold text-sm">
                   2
                 </div>
                 <div>
                   <h4 className="font-medium text-sm mb-1">Draw Cards</h4>
                   <p className="text-xs text-zinc-500">
-                    Each turn, you'll receive an AI-generated dare with a time limit and drink penalty.
+                    Each turn, you'll receive an AI-generated dare with a time
+                    limit and drink penalty.
                   </p>
                 </div>
               </div>
               <div className="flex gap-4 items-start">
-                <div className="w-8 h-8 rounded-full bg-rose-900/20 flex items-center justify-center flex-shrink-0 text-rose-500 font-bold text-sm">
+                <div className="w-8 h-8 rounded-full bg-red-900/20 flex items-center justify-center flex-shrink-0 text-red-500 font-bold text-sm">
                   3
                 </div>
                 <div>
                   <h4 className="font-medium text-sm mb-1">Do It or Drink</h4>
                   <p className="text-xs text-zinc-500">
-                    Complete the dare before time runs out, or take the drink penalty.
+                    Complete the dare before time runs out, or take the drink
+                    penalty.
                   </p>
                 </div>
               </div>
               <div className="flex gap-4 items-start">
-                <div className="w-8 h-8 rounded-full bg-rose-900/20 flex items-center justify-center flex-shrink-0 text-rose-500 font-bold text-sm">
+                <div className="w-8 h-8 rounded-full bg-red-900/20 flex items-center justify-center flex-shrink-0 text-red-500 font-bold text-sm">
                   4
                 </div>
                 <div>
-                  <h4 className="font-medium text-sm mb-1">Progressive Intensity</h4>
+                  <h4 className="font-medium text-sm mb-1">
+                    Progressive Intensity
+                  </h4>
                   <p className="text-xs text-zinc-500">
-                    Dares get bolder as the game progresses. Each mode has its own journey.
+                    Dares get bolder as the game progresses. Each mode has its
+                    own journey.
                   </p>
                 </div>
               </div>
@@ -148,13 +168,15 @@ const HowToPlay = ({ isOpen, onClose }) => {
           {/* Privacy Notice */}
           <div className="p-4 rounded-xl bg-zinc-900/20 border border-zinc-800">
             <p className="text-xs text-zinc-500 text-center">
-              🔒 <span className="text-zinc-400">Privacy:</span> Your game data stays on your device. We don't store your cards, stats, or personal information.
+              🔒 <span className="text-zinc-400">Privacy:</span> Your game data
+              stays on your device. We don't store your cards, stats, or
+              personal information.
             </p>
           </div>
 
           <button
             onClick={onClose}
-            className="w-full py-4 bg-rose-600 text-white rounded-full text-xs uppercase tracking-[0.4em] font-bold hover:bg-rose-500 transition-all"
+            className="w-full py-4 bg-red-600 text-white rounded-full text-xs uppercase tracking-[0.4em] font-bold hover:bg-red-500 transition-all"
           >
             Got It, Let's Play
           </button>

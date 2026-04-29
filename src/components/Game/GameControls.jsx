@@ -17,7 +17,7 @@ const GameControls = ({
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           onClick={onNext}
-          className="w-full py-8 bg-white text-black rounded-full font-bold text-[10px] tracking-[0.6em] uppercase hover:bg-rose-600 hover:text-white transition-all shadow-xl"
+          className="w-full py-8 bg-white text-black rounded-full font-bold text-[10px] tracking-[0.6em] uppercase hover:bg-red-600 hover:text-white transition-all shadow-xl"
         >
           Next Phase
         </motion.button>
@@ -32,7 +32,7 @@ const GameControls = ({
           </button>
           <button
             onClick={onDrink}
-            className="py-6 bg-rose-600 text-white rounded-full text-[10px] font-bold tracking-[0.4em] uppercase flex items-center justify-center gap-3 hover:bg-rose-500 transition-all"
+            className="py-6 bg-red-600 text-white rounded-full text-[10px] font-bold tracking-[0.4em] uppercase flex items-center justify-center gap-3 hover:bg-red-500 transition-all"
           >
             <Wine size={14} /> Drink {card.difficulty || 1}
           </button>

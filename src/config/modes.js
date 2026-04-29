@@ -43,7 +43,7 @@ export const GAME_MODES = {
     minPlayers: 2,
     maxPlayers: 2,
     defaultDuration: 20,
-    color: "rose",
+    color: "red",
     systemPromptKey: "couples",
     intensity: 3,
     inventoryOptions: [

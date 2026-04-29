@@ -1,4 +1,5 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
+import { useNavigate, useLocation } from "react-router-dom";
 import { AnimatePresence } from "framer-motion";
 import ModeSelector from "./ModeSelector";
 import ParticipantSetup from "./ParticipantSetup";
@@ -8,6 +9,17 @@ import InventorySelector from "./InventorySelector";
 const Onboarding = ({ setup, setSetup, onComplete }) => {
   const [step, setStep] = useState(0);
   const [selectedDuration, setSelectedDuration] = useState(20);
+  const navigate = useNavigate();
+  const location = useLocation();
+
+  // Check if a default mode is passed from PSEO pages
+  useEffect(() => {
+    const defaultMode = location.state?.defaultMode;
+    if (defaultMode && (defaultMode === "bff" || defaultMode === "date" || defaultMode === "couples")) {
+      setSetup({ ...setup, gameMode: defaultMode });
+      setStep(1); // Skip to participant setup
+    }
+  }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
   const handleModeSelect = (modeId) => {
     setSetup({ ...setup, gameMode: modeId });
@@ -33,6 +45,7 @@ const Onboarding = ({ setup, setSetup, onComplete }) => {
       finalSetup.players = setup.tempPlayers.filter((x) => x.name.trim());
     }
     onComplete(finalSetup, selectedDuration);
+    navigate(`/play/${setup.gameMode}`);
   };
 
   return (

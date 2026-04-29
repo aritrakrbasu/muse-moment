@@ -6,6 +6,7 @@ const SEO = ({
   description = "Spice up your gatherings with Muse Moment - the AI-powered party game for couples, friends, and dates. Take on daring challenges or drink as penalty. Three game modes with progressive intensity.",
   path = "",
   image = "https://aritrakrbasu.github.io/muse-moment/og-image.png",
+  schema = null,
 }) => {
   const url = `https://aritrakrbasu.github.io/muse-moment/${path}`;
 
@@ -33,6 +34,13 @@ const SEO = ({
 
       {/* Additional */}
       <link rel="canonical" href={url} />
+
+      {/* Structured Data */}
+      {schema && (
+        <script type="application/ld+json">
+          {JSON.stringify(schema)}
+        </script>
+      )}
     </Helmet>
   );
 };

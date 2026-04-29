@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useRef } from "react";
+import { useNavigate } from "react-router-dom";
 import { AnimatePresence } from "framer-motion";
 import GameHeader from "./GameHeader";
 import CardDisplay from "./CardDisplay";
@@ -9,6 +10,7 @@ import { useTimer } from "../../hooks/useTimer";
 const GamePlay = ({ setup, totalTurns, onComplete }) => {
   const [currentTurn, setCurrentTurn] = useState(1);
   const { timeLeft, isTimerActive, startTimer, stopTimer } = useTimer();
+  const navigate = useNavigate();
   const {
     loading,
     currentCard,
@@ -31,6 +33,7 @@ const GamePlay = ({ setup, totalTurns, onComplete }) => {
       const result = await handleNextTurn(currentTurn);
       if (result === "complete") {
         onComplete({ gameStats, history });
+        navigate(`/complete/${setup.gameMode}`);
       } else if (result?.duration !== undefined) {
         stopTimer();
       }
@@ -63,6 +66,7 @@ const GamePlay = ({ setup, totalTurns, onComplete }) => {
       const result = await handleNextTurn(nextTurn);
       if (result === "complete") {
         onComplete({ gameStats, history });
+        navigate(`/complete/${setup.gameMode}`);
       } else if (result?.duration !== undefined) {
         stopTimer();
       }

@@ -62,7 +62,7 @@ const CardDisplay = ({
             >
               {currentSeconds}
             </motion.div>
-            <div className="h-[1px] w-[15vw] bg-gradient-to-r from-transparent via-rose-900 to-transparent my-[1vh]" />
+            <div className="h-[1px] w-[15vw] bg-gradient-to-r from-transparent via-red-900 to-transparent my-[1vh]" />
             <span className="text-[min(2.5vw,11px)] uppercase tracking-[0.6em] text-zinc-600 font-bold">
               Seconds
             </span>
@@ -77,7 +77,7 @@ const CardDisplay = ({
           <RefreshCcw
             size={16}
             strokeWidth={1}
-            className="text-zinc-700 group-active:rotate-180 group-active:text-rose-800 transition-all duration-700"
+            className="text-zinc-700 group-active:rotate-180 group-active:text-red-800 transition-all duration-700"
           />
           <span className="relative z-10 text-[min(2.5vw,10px)] uppercase tracking-[0.5em] text-zinc-500 group-active:text-white transition-colors">
             Redraw Narrative

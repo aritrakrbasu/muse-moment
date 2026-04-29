@@ -7,16 +7,20 @@ const CompletionScreen = ({ gameStats, history, onRestart, onExport }) => {
 
   const generateShareText = () => {
     const completionRate = Math.round(
-      (gameStats.daresCompleted / (gameStats.daresCompleted + gameStats.drinksTaken)) * 100
+      (gameStats.daresCompleted /
+        (gameStats.daresCompleted + gameStats.drinksTaken)) *
+        100,
     );
 
-    return `🎯 I survived Muse Moment!\n\n` +
+    return (
+      `🎯 I survived Muse Moment!\n\n` +
       `✅ Completed: ${gameStats.daresCompleted} dares\n` +
       `🍺 Refused: ${gameStats.drinksTaken} times\n` +
       `💧 Total sips: ${gameStats.totalSips}\n` +
       `📊 Completion rate: ${completionRate}%\n\n` +
       `Think you can do better? Challenge accepted! 👇\n` +
-      `https://aritrakrbasu.github.io/muse-moment/`;
+      `https://aritrakrbasu.github.io/muse-moment/`
+    );
   };
 
   const handleShare = async () => {
@@ -45,7 +49,9 @@ const CompletionScreen = ({ gameStats, history, onRestart, onExport }) => {
   };
 
   const completionRate = Math.round(
-    (gameStats.daresCompleted / (gameStats.daresCompleted + gameStats.drinksTaken)) * 100
+    (gameStats.daresCompleted /
+      (gameStats.daresCompleted + gameStats.drinksTaken)) *
+      100,
   );
 
   return (
@@ -63,15 +69,19 @@ const CompletionScreen = ({ gameStats, history, onRestart, onExport }) => {
         >
           <div className="text-8xl mb-4">🏆</div>
         </motion.div>
-        <h1 className="text-6xl md:text-7xl font-serif italic tracking-tight bg-gradient-to-r from-rose-500 to-pink-500 bg-clip-text text-transparent">
+        <h1 className="text-6xl md:text-7xl font-serif italic tracking-tight bg-gradient-to-r from-red-500 to-pink-500 bg-clip-text text-transparent">
           Session Complete
         </h1>
         <p className="text-zinc-600 font-bold uppercase tracking-[0.6em] text-[9px]">
           Muse Moment
         </p>
         <div className="pt-4">
-          <span className="text-5xl font-bold tabular-nums text-rose-500">{completionRate}%</span>
-          <p className="text-xs text-zinc-500 uppercase tracking-widest mt-2">Completion Rate</p>
+          <span className="text-5xl font-bold tabular-nums text-red-500">
+            {completionRate}%
+          </span>
+          <p className="text-xs text-zinc-500 uppercase tracking-widest mt-2">
+            Completion Rate
+          </p>
         </div>
       </div>
 
@@ -82,7 +92,10 @@ const CompletionScreen = ({ gameStats, history, onRestart, onExport }) => {
           { label: "Refused", val: gameStats.drinksTaken, emoji: "🍺" },
           { label: "Total Sips", val: gameStats.totalSips, emoji: "💧" },
         ].map((s) => (
-          <div key={s.label} className="text-center space-y-3 p-4 rounded-2xl bg-zinc-900/30 border border-white/5">
+          <div
+            key={s.label}
+            className="text-center space-y-3 p-4 rounded-2xl bg-zinc-900/30 border border-white/5"
+          >
             <span className="text-2xl">{s.emoji}</span>
             <div>
               <span className="block text-3xl md:text-4xl font-light tabular-nums text-white">
@@ -125,7 +138,7 @@ const CompletionScreen = ({ gameStats, history, onRestart, onExport }) => {
         <div className="grid grid-cols-2 gap-3">
           <button
             onClick={handleShare}
-            className="flex items-center justify-center gap-2 py-4 bg-rose-600 text-white rounded-full text-[10px] uppercase tracking-[0.3em] font-bold hover:bg-rose-500 transition-all"
+            className="flex items-center justify-center gap-2 py-4 bg-red-600 text-white rounded-full text-[10px] uppercase tracking-[0.3em] font-bold hover:bg-red-500 transition-all"
           >
             <Share2 size={14} strokeWidth={1} />
             Share Results
@@ -149,13 +162,17 @@ const CompletionScreen = ({ gameStats, history, onRestart, onExport }) => {
           }}
           className="flex items-center justify-center gap-2 py-3 border border-zinc-800 rounded-full text-xs uppercase tracking-[0.2em] text-zinc-600 hover:text-white hover:border-zinc-700 transition-all"
         >
-          {copied ? <Check size={14} strokeWidth={1} /> : <Copy size={14} strokeWidth={1} />}
+          {copied ? (
+            <Check size={14} strokeWidth={1} />
+          ) : (
+            <Copy size={14} strokeWidth={1} />
+          )}
           {copied ? "Link Copied!" : "Copy Challenge Link"}
         </button>
 
         <button
           onClick={onRestart}
-          className="w-full py-6 bg-white text-black rounded-full text-[10px] uppercase tracking-[0.4em] font-bold hover:bg-rose-600 hover:text-white transition-all"
+          className="w-full py-6 bg-white text-black rounded-full text-[10px] uppercase tracking-[0.4em] font-bold hover:bg-red-600 hover:text-white transition-all"
         >
           Play Again
         </button>
