@@ -1,3 +1,8 @@
-# https://www.robotstxt.org/robotstxt.html
+# robots.txt for Muse Moment
+
 User-agent: *
-Disallow:
+Allow: /
+
+# Sitemap
+Sitemap: https://aritrakrbasu.github.io/muse-moment/sitemap.xml
+
