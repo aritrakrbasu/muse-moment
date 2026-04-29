@@ -1,8 +1,15 @@
 import React from "react";
 
-const GameHeader = ({ currentTurn, totalTurns, gameMode, manName, womanName, players }) => {
+const GameHeader = ({
+  currentTurn,
+  totalTurns,
+  gameMode,
+  manName,
+  womanName,
+  players,
+}) => {
   return (
-    <header className="flex justify-between items-center mb-32 border-b border-white/5 pb-8">
+    <header className="flex justify-between items-center  border-b border-white/5 pb-8">
       <div className="space-y-2">
         <p className="text-[9px] uppercase tracking-[0.4em] font-bold text-zinc-600">
           Progression

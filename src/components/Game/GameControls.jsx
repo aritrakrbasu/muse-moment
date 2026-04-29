@@ -11,7 +11,7 @@ const GameControls = ({
   onNext,
 }) => {
   return (
-    <footer className="mt-32 max-w-lg mx-auto w-full">
+    <footer className="mt-10 max-w-lg mx-auto w-full">
       {card.actionTaken ? (
         <motion.button
           initial={{ opacity: 0 }}

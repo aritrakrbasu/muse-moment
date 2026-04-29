@@ -1,9 +1,11 @@
-import React from "react";
-import { motion, AnimatePresence } from "framer-motion";
-import { Users, Heart, Flame, ArrowUpRight } from "lucide-react";
+import React, { useState } from "react";
+import { motion } from "framer-motion";
+import { Users, Heart, Flame, ArrowUpRight, HelpCircle } from "lucide-react";
 import { GAME_MODES } from "../../config/modes";
+import HowToPlay from "../HowToPlay";
 
 const ModeSelector = ({ onSelect }) => {
+  const [showHowToPlay, setShowHowToPlay] = useState(false);
   const containerVariants = {
     hidden: { opacity: 0 },
     visible: {
@@ -39,6 +41,16 @@ const ModeSelector = ({ onSelect }) => {
         >
           Select <span className="italic font-serif">Narrative</span>
         </motion.h1>
+
+        {/* How to Play Button */}
+        <motion.button
+          variants={itemVariants}
+          onClick={() => setShowHowToPlay(true)}
+          className="mt-6 flex items-center gap-2 mx-auto text-zinc-600 hover:text-rose-500 transition-colors text-xs uppercase tracking-[0.3em]"
+        >
+          <HelpCircle size={14} strokeWidth={1} />
+          How to Play
+        </motion.button>
       </div>
 
       {/* Grid Layout */}
@@ -94,6 +106,8 @@ const ModeSelector = ({ onSelect }) => {
           </motion.button>
         ))}
       </div>
+
+      <HowToPlay isOpen={showHowToPlay} onClose={() => setShowHowToPlay(false)} />
     </motion.div>
   );
 };

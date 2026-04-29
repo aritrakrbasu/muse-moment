@@ -1,6 +1,6 @@
 import { useState, useCallback } from "react";
 import { generateKinkyCard } from "../services/ai";
-import { DIFFICULTY_LEVELS, calculateDifficulty } from "../config/difficulty";
+import { calculateDifficulty } from "../config/difficulty";
 
 const extractSeconds = (text, isLast) => {
   if (isLast) return null;

@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { AnimatePresence } from "framer-motion";
 import GameHeader from "./GameHeader";
 import CardDisplay from "./CardDisplay";
@@ -6,11 +6,7 @@ import GameControls from "./GameControls";
 import { useGameEngine } from "../../hooks/useGameEngine";
 import { useTimer } from "../../hooks/useTimer";
 
-const GamePlay = ({
-  setup,
-  totalTurns,
-  onComplete,
-}) => {
+const GamePlay = ({ setup, totalTurns, onComplete }) => {
   const [currentTurn, setCurrentTurn] = useState(1);
   const { timeLeft, isTimerActive, startTimer, stopTimer } = useTimer();
   const {
@@ -25,8 +21,12 @@ const GamePlay = ({
     resetCardAction,
     extractSeconds,
   } = useGameEngine(setup, totalTurns);
+  const hasInitialized = useRef(false);
 
   useEffect(() => {
+    if (hasInitialized.current) return;
+    hasInitialized.current = true;
+
     const initGame = async () => {
       const result = await handleNextTurn(currentTurn);
       if (result === "complete") {
@@ -36,15 +36,18 @@ const GamePlay = ({
       }
     };
     initGame();
-  }, []);
+  }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
   const handleRegenerateClick = async () => {
-    const duration = await handleRegenerate(currentTurn);
+    await handleRegenerate(currentTurn);
     stopTimer();
   };
 
   const handleDoItClick = () => {
-    const duration = extractSeconds(currentCard.text || "", currentTurn - 1 === totalTurns);
+    const duration = extractSeconds(
+      currentCard.text || "",
+      currentTurn - 1 === totalTurns,
+    );
     handleDoIt(duration, startTimer, () => {
       resetCardAction();
     });
@@ -70,7 +73,7 @@ const GamePlay = ({
   const isFinalCard = currentTurn - 1 === totalTurns;
 
   return (
-    <div className="flex flex-col min-h-screen">
+    <div className="flex flex-col ">
       <GameHeader
         currentTurn={currentTurn}
         totalTurns={totalTurns}

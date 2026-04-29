@@ -1,6 +1,7 @@
 import React from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { RefreshCcw } from "lucide-react";
+import CardRating from "./CardRating";
 
 const CardDisplay = ({
   card,
@@ -21,9 +22,10 @@ const CardDisplay = ({
     : extractSeconds(card?.text || "", isFinalCard) || 0;
 
   return (
-    <div className="fixed inset-0 h-[100dvh] w-full bg-[#050505] text-white flex flex-col justify-between overflow-hidden select-none px-[8vw] py-[10vh]">
-      {/* 2. THE MAIN NARRATIVE: LOUD, BOLD, BUT REFINED SERIF */}
-      <main className="flex-1 flex items-center justify-center text-center">
+    /* Changed 'fixed inset-0' to 'relative' and 'h-[100dvh]' to 'min-h-screen' */
+    <div className="relative  w-full bg-[#050505] text-white flex flex-col justify-between overflow-hidden select-none px-[8vw] py-[10vh]">
+      {/* MAIN NARRATIVE */}
+      <main className="flex-1 flex items-center justify-center text-center py-12">
         <AnimatePresence mode="wait">
           {loading ? (
             <motion.div
@@ -31,25 +33,25 @@ const CardDisplay = ({
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
-              className="text-[6vw] font-serif italic text-zinc-900 animate-pulse"
+              className="text-[6vw] font-serif italic text-zinc-800 animate-pulse"
             >
               Syncing Session
             </motion.div>
           ) : (
             <motion.h2
-              key={card.text}
+              key={card?.text}
               initial={{ opacity: 0, filter: "blur(15px)", y: 20 }}
               animate={{ opacity: 1, filter: "blur(0px)", y: 0 }}
               transition={{ duration: 1, ease: [0.22, 1, 0.36, 1] }}
-              className="text-[clamp(2.2rem,11vw,6.5rem)] font-serif italic leading-[1.1] tracking-tight text-zinc-100"
+              className="text-[clamp(1.8rem,8vw,4.5rem)] font-serif italic leading-[1.1] tracking-tight text-zinc-100"
             >
-              "{card.text}"
+              "{card?.text}"
             </motion.h2>
           )}
         </AnimatePresence>
       </main>
 
-      {/* 3. THE TIMEPIECE & ACTION */}
+      {/* THE TIMEPIECE & ACTION */}
       <footer className="flex-none flex flex-col items-center gap-[6vh]">
         {!isFinalCard && (
           <div className="flex flex-col items-center">
@@ -69,7 +71,7 @@ const CardDisplay = ({
 
         <button
           onClick={onRegenerate}
-          className="group relative py-[2vh] px-[6vw] flex flex-col items-center gap-[1vh] transition-all"
+          className="group relative  px-[6vw] flex flex-col items-center gap-[1vh] transition-all"
         >
           <div className="absolute inset-0 bg-white/[0.02] scale-x-0 group-active:scale-x-100 transition-transform duration-500 origin-center rounded-full" />
           <RefreshCcw
@@ -81,6 +83,20 @@ const CardDisplay = ({
             Redraw Narrative
           </span>
         </button>
+
+        {/* Card Rating - only show when not loading and not in timer */}
+        <AnimatePresence mode="wait">
+          {!loading && !isTimerActive && card?.text && (
+            <motion.div
+              initial={{ opacity: 0, y: 10 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: 10 }}
+              className="w-full"
+            >
+              <CardRating cardText={card.text} />
+            </motion.div>
+          )}
+        </AnimatePresence>
       </footer>
 
       <style jsx>{`

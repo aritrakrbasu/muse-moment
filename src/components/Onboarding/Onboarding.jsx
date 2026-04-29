@@ -4,7 +4,6 @@ import ModeSelector from "./ModeSelector";
 import ParticipantSetup from "./ParticipantSetup";
 import DurationSelector from "./DurationSelector";
 import InventorySelector from "./InventorySelector";
-import { GAME_MODES } from "../../config/modes";
 
 const Onboarding = ({ setup, setSetup, onComplete }) => {
   const [step, setStep] = useState(0);
@@ -13,6 +12,10 @@ const Onboarding = ({ setup, setSetup, onComplete }) => {
   const handleModeSelect = (modeId) => {
     setSetup({ ...setup, gameMode: modeId });
     setStep(1);
+  };
+
+  const handleBack = () => {
+    setStep(step - 1);
   };
 
   const handleContinue = () => {
@@ -43,6 +46,7 @@ const Onboarding = ({ setup, setSetup, onComplete }) => {
           setup={setup}
           onUpdateSetup={setSetup}
           onContinue={handleContinue}
+          onBack={handleBack}
         />
       )}
 

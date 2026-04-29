@@ -4,90 +4,89 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Project Overview
 
-Muse Moment is a React-based intimate card game for couples. The app generates AI-powered "dare cards" using Google's Gemini AI, with a progressive intensity system across configurable session lengths.
+Muse Moment is a "Do or Drink" party game web app with three game modes: BFF (friends), Date (dating), and Couples (intimate). Players receive AI-generated dares/challenges and can either complete them or drink as a penalty.
+
+**Key architecture:** This is a React SPA with a separate Cloudflare Worker backend. All AI generation happens server-side through the worker to keep API keys secure.
 
 ## Development Commands
 
 ```bash
-npm start          # Start dev server (localhost:3000)
-npm test           # Run tests in watch mode
-npm run build      # Create production build
+# Start development server
+npm start
+
+# Build for production
+npm run build
+
+# Run tests
+npm test
+
+# Deploy to GitHub Pages
+npm run deploy
 ```
+
+**Environment setup:** Copy `.env.example` to `.env` and set `REACT_APP_WORKER_URL` to your deployed Cloudflare Worker URL.
 
 ## Architecture
 
-### Core Game State Machine
-The app uses a `gameState` state machine with four phases:
-- `onboarding` - Multi-step setup (names → duration → toy selection)
-- `playing` - Active card display with pulse timer
-- `complete` - Session completion screen
-- `souvenir` - Timeline review of the session
+### Frontend (React SPA)
+- **Entry point:** `src/App.js` - manages three game states: onboarding → playing → complete
+- **Styling:** Tailwind CSS with dark theme (`#0a0a0a` bg, `#f4f4f5` text)
+- **Animations:** Framer Motion for card transitions
+- **State management:** React hooks (no external state library)
+- **Icons:** Lucide React
 
-### AI Service Layer (`src/services/ai.js` + `worker/`)
+### Backend (Cloudflare Worker)
+Located in `worker/` directory. This is a separate deployable unit that:
+- Wraps Google Gemini AI API calls
+- Handles CORS for the frontend
+- Contains mode-specific system prompts and fallback cards
+- Must be deployed first with `GEMINI_API_KEY` secret set via `npx wrangler secret put GEMINI_API_KEY`
 
-**Frontend (`src/services/ai.js`)**:
-- Thin client that sends game parameters to Cloudflare Worker
-- Only dependency: `REACT_APP_WORKER_URL` environment variable
-- No API keys or AI logic in the browser
+### Game Modes & Progression
 
-**Worker (`worker/index.js`)**:
-- Handles ALL AI logic server-side using `@google/generative-ai`
-- Phase-gated content generation (seduction → play → climax phases)
-- Verb rotation system prevents repetitive "massage loop" behavior
-- Fallback mechanical card generation when AI fails
-- Post-processing regex corrects gender/anatomy terms based on actor/receiver roles
-- API key stored as Cloudflare Worker secret (`GEMINI_API_KEY`)
+The three modes (`src/config/modes.js`) each have distinct intensity curves:
+- **BFF:** 3 phases (Warm-up → Heating Up → Peak Chaos)
+- **Date:** 3 phases (Breaking Ice → Building Tension → Spicy Finale)  
+- **Couples:** 4 phases (Warming Up → Building Chemistry → Foreplay → Climax)
 
-### Progression System
-- Session progress (0.0 to 1.0) gates content types:
-  - ≤0.25: Seduction phase (foreplay, no penetration/positions)
-  - >0.25 to final-3: Play phase (oral, manual stimulation)
-  - Final 3 turns: Climax phase (positions, penetration, "until finish" duration)
+Progress is calculated as `turn / totalTurns` and drives prompt intensity in the worker.
 
-### Timer & Haptics
-- `startPulseTimer()` creates a countdown with synchronized vibration pulses
-- Uses Web Audio API for end-of-timer beep
-- `navigator.vibrate()` for haptic feedback (mobile devices)
-- Timer blocks "Next Command" button while active
+### Key Hooks
 
-### Styling
-- Tailwind CSS with PostCSS/Autoprefixer
-- Framer Motion for animations
-- Lucide React for icons
-- Custom dark theme: `#020202`/`#050505` backgrounds, rose-600 accent, zinc grays
+- **`useGameEngine`** (`src/hooks/useGameEngine.js`): Core game logic - handles card generation, difficulty calculation, regeneration, and stats tracking
+- **`useTimer`** (`src/hooks/useTimer.js`): Countdown timer with haptic feedback and audio beep on completion
 
-## Key Technical Details
+### Services
 
-- **Alternating turns**: Odd turns = man acts, even turns = woman acts (based on `turn % 2 !== 0`)
-- **Entropy injection**: Random salt on every turn prevents repetitive AI outputs
-- **Regen seed**: Incrementing seed forces AI variation when user regenerates
-- **History**: Stores last 10 cards, passed to AI to prevent repetition
-- **Biology guard**: Post-processing regex ensures anatomical terms match the receiver's gender
+- **`ai.js`**: Frontend service that calls the Cloudflare Worker. Returns generated card text.
+- **`weather.js`**: Fetches real-time weather/time data for environmental context (currently unused in prompts but available)
 
-## Deployment
+### Difficulty System
 
-### Production (GitHub Pages / Netlify / Vercel)
+Difficulty (1-3) is auto-calculated from AI responses in `calculateDifficulty()` (`src/config/difficulty.js`):
+- Parses "drink N sip" patterns
+- Falls back to duration-based calculation (≤30s=1, ≤60s=2, >60s=3)
+- Keyword-based fallback for intensity detection
 
-**ALL AI logic runs server-side** - deploy the Cloudflare Worker first:
+### Actor/Receiver Logic
+
+Players alternate turns each round. For Date/Couples modes: odd turns = man acts, even turns = woman acts. For BFF: cycles through `setup.players` array.
+
+## Worker Deployment
+
+The Cloudflare Worker (`worker/index.js`) must be deployed before the app can function:
 
 ```bash
-# 1. Deploy the Cloudflare Worker
 cd worker
 npm install
-npx wrangler secret put GEMINI_API_KEY  # Paste your Gemini API key
-npm run deploy
-
-# 2. Copy the worker URL from output, then update root .env:
-# REACT_APP_WORKER_URL=https://muse-moment-gemini-proxy.xxx.workers.dev
-
-# 3. Build and deploy the React app
-cd ..
-npm run build
-# Deploy the build/ folder to your hosting provider
+npx wrangler deploy
+npx wrangler secret put GEMINI_API_KEY  # Prompts for key input
 ```
 
-**Security**: The API key never leaves the server. The frontend only knows the worker URL.
+After deployment, copy the worker URL (e.g., `https://muse-moment-gemini-proxy.YOUR_SUBDOMAIN.workers.dev`) to `REACT_APP_WORKER_URL` in `.env`.
 
-### Local Development (optional)
+## Testing Strategy
 
-For local testing without the worker, you can set `REACT_APP_GEMINI_API_KEY` in `.env` - but this is **NOT recommended** as the key will be visible in the browser.
+- Component testing: `src/**/*.test.js` files use React Testing Library
+- Manual game flow testing: Test all three modes with short turn counts (5-10 turns) to verify progression intensity
+- Worker testing: Use `npx wrangler dev` for local worker development before deploying
