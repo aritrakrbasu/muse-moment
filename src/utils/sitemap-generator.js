@@ -18,9 +18,10 @@ function generateSitemap() {
 
   // Add static routes
   staticRoutes.forEach((route) => {
+    const url = route.path ? `${baseUrl}/#/${route.path}` : baseUrl;
     urls.push(`
   <url>
-    <loc>${baseUrl}/${route.path}</loc>
+    <loc>${url}</loc>
     <lastmod>${new Date().toISOString()}</lastmod>
     <changefreq>${route.changefreq}</changefreq>
     <priority>${route.priority}</priority>
@@ -31,7 +32,7 @@ function generateSitemap() {
   topicPages.forEach((page) => {
     urls.push(`
   <url>
-    <loc>${baseUrl}/${page.slug}</loc>
+    <loc>${baseUrl}/#/${page.slug}</loc>
     <lastmod>${new Date().toISOString()}</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
@@ -42,7 +43,7 @@ function generateSitemap() {
   categoryPages.forEach((page) => {
     urls.push(`
   <url>
-    <loc>${baseUrl}/${page.slug}</loc>
+    <loc>${baseUrl}/#/${page.slug}</loc>
     <lastmod>${new Date().toISOString()}</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
